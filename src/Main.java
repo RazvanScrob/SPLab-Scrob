@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Book {
-    private String title;
-    private List<Chapter> chapters = new ArrayList<>();
+    private final String title;
+    private final List<Chapter> chapters = new ArrayList<>();
 
     public Book(String title) {
         this.title = title;
@@ -22,7 +22,7 @@ class Book {
 }
 
 class Author {
-    private String name;
+    private final String name;
 
     public Author(String name) {
         this.name = name;
@@ -34,7 +34,7 @@ class Author {
 }
 
 class Table {
-    private String title;
+    private final String title;
 
     public Table(String title) {
         this.title = title;
@@ -46,7 +46,7 @@ class Table {
 }
 
 class Paragraph {
-    private String text;
+    private final String text;
 
     public Paragraph(String text) {
         this.text = text;
@@ -58,8 +58,8 @@ class Paragraph {
 }
 
 class SubChapter {
-    private String name;
-    private List<Object> contents = new ArrayList<>();
+    private final String name;
+    private final List<Object> contents = new ArrayList<>();
 
     public SubChapter(String name) {
         this.name = name;
@@ -82,8 +82,8 @@ class SubChapter {
 }
 
 class Chapter {
-    private String name;
-    private List<SubChapter> subChapters = new ArrayList<>();
+    private final String name;
+    private final List<SubChapter> subChapters = new ArrayList<>();
 
     public Chapter(String name) {
         this.name = name;
