@@ -79,6 +79,7 @@ class SubChapter {
             }
         }
     }
+    public void printSomethin(){}
 }
 
 class Chapter {
