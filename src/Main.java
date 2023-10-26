@@ -4,6 +4,7 @@ import java.util.List;
 class Book {
     private final String title;
     private final List<Chapter> chapters = new ArrayList<>();
+    private final List<Section> sections = new ArrayList<>();
 
     public Book(String title) {
         this.title = title;
@@ -13,10 +14,17 @@ class Book {
         chapters.add(chapter);
     }
 
+    public void addSection(Section section) {
+        sections.add(section);
+    }
+
     public void printBook() {
         System.out.println("Book Title: " + title);
         for (Chapter chapter : chapters) {
             chapter.printChapter();
+        }
+        for (Section section : sections) {
+            section.printSection();
         }
     }
 }
@@ -57,6 +65,44 @@ class Paragraph {
     }
 }
 
+class Image {
+    private final String caption;
+
+    public Image(String caption) {
+        this.caption = caption;
+    }
+
+    public void print() {
+        System.out.println("Image Caption: " + caption);
+    }
+}
+
+class Section {
+    private final String title;
+    private final List<Object> contents = new ArrayList<>();
+
+    public Section(String title) {
+        this.title = title;
+    }
+
+    public void addContent(Object content) {
+        contents.add(content);
+    }
+
+    public void printSection() {
+        System.out.println("Section Title: " + title);
+        for (Object content : contents) {
+            if (content instanceof Table) {
+                ((Table) content).print();
+            } else if (content instanceof Paragraph) {
+                ((Paragraph) content).print();
+            } else if (content instanceof Image) {
+                ((Image) content).print();
+            }
+        }
+    }
+}
+
 class SubChapter {
     private final String name;
     private final List<Object> contents = new ArrayList<>();
@@ -78,11 +124,6 @@ class SubChapter {
                 ((Paragraph) content).print();
             }
         }
-    }
-    public void printSomethin(){
-
-
-
     }
 }
 
@@ -129,5 +170,30 @@ public class Main {
 
         author.print();
         book.printBook();
+    }
+
+    public static void main2(String[] args) throws Exception {
+        long startTime = System.currentTimeMillis();
+        Image img1 = new Image("Pamela Anderson");
+        Image img2 = new Image("Kim Kardashian");
+        Image img3 = new Image("Kirby Griffin");
+        Section playboyS1 = new Section("Front Cover");
+        playboyS1.addContent(img1);
+        Section playboyS2 = new Section("Summer Girls");
+        playboyS2.addContent(img2);
+        playboyS2.addContent(img3);
+        Book playboy = new Book("Playboy");
+        playboy.addSection(playboyS1);
+        playboy.addSection(playboyS2);
+        long endTime = System.currentTimeMillis();
+        System.out.println("Creation of the content took " + (endTime - startTime) + " milliseconds");
+        startTime = System.currentTimeMillis();
+        playboyS1.printSection();
+        endTime = System.currentTimeMillis();
+        System.out.println("Printing of the section 1 took " + (endTime - startTime) + " milliseconds");
+        startTime = System.currentTimeMillis();
+        playboyS2.printSection();
+        endTime = System.currentTimeMillis();
+        System.out.println("Printing of the section 2 took " + (endTime - startTime) + " milliseconds");
     }
 }
